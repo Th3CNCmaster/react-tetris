@@ -6,7 +6,7 @@ class TetrisRow extends React.Component {
 
     render = () => {
         const makeRow = (item) => {
-            let q = ["black", "red", "blue", "green", "yellow", "pink", "magenta", "gray", "beige"];
+            let q = ["black", "red", "blue", "green", "yellow", "pink", "magenta", "gray", "beige", "maroon"];
             return (<td style={{ backgroundColor: q[item], width: "25px", height: "25px", }}>{item}</td>);
         };
         const listItems = this.props.row.map(makeRow);
