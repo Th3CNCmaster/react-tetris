@@ -4,6 +4,9 @@ class GameLogic {
         let width = 10;
         let height = 20;
         this.score = 0;
+        this.time = 0;
+        this.lastTime = 0;
+        this.slowness = 10;
         this.gameOver = false;
         // rows
         let row = [];
@@ -99,7 +102,12 @@ class GameLogic {
     fall = () => {
         if (!this.gameOver) {
             this.counter++;
-            if (this.counter % 10 == 0) {
+            this.time++;
+            if (this.time > this.lastTime * 1.2 + 700 && this.slowness > 5) {
+                this.lastTime = this.time;
+                this.slowness--;
+            }
+            if (this.counter % this.slowness == 0) {
                 if (!this.gameOver) {
                     this.score += 10;
                 }
