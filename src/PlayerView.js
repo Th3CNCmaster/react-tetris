@@ -13,20 +13,20 @@ class PlayerView extends React.Component {
                 <tbody>
                     <tr>
                         <td>
-                            <TetrisGrid list={this.props.game} />
+                            <TetrisGrid list={this.props.everything.game} />
                         </td>
                         <td>
-                            <TetrisGrid list={this.props.next} />
+                            <TetrisGrid list={this.props.everything.next} />
                         </td>
                         <td>
                             <h2>
-                                Score: {this.props.score}
+                                Score: {this.props.everything.score}
                             </h2>
                             <h1>
-                                {this.props.lose}
+                                {this.props.everything.lose}
                             </h1>
                             <h2>
-                                Level: {this.props.level}
+                                Level: {this.props.everything.level}
                             </h2>
                         </td>
                     </tr>

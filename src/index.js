@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import TetrisGame from "./TetrisGame";
+import SingleplayerTetrisGame from "./SingleplayerTetrisGame";
+import MultiplayerTetrisGame from "./MultiplayerTetrisGame";
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TetrisGame />
+    <SingleplayerTetrisGame />
   </React.StrictMode>,
   document.getElementById('root')
 );

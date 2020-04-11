@@ -5,24 +5,33 @@ import PlayerView from './PlayerView';
 import GameLogic from './GameLogic';
 
 
-class TetrisGame extends React.Component {
+class SingleplayerTetrisGame extends React.Component {
     constructor(props) {
         super(props);
-        this.GameLogic = new GameLogic("asd");
+        this.GameLogic = new GameLogic(this);
         this.state = {
-            game: [[1, 2, 3], [2, 3, 4], [1, 1, 1, 1, 1, 1, 1, 1,]],
-            next: [[1, 2, 3], [2, 3, 4], [1, 11, 1]],
-            score: 1,
-            lose: "",
-            level: "",
+            everything: {
+                game: [[1, 2, 3], [2, 3, 4], [1, 1, 1, 1, 1, 1, 1, 1,]],
+                next: [[1, 2, 3], [2, 3, 4], [1, 11, 1]],
+                score: 1,
+                lose: "",
+                level: "",
+            }
         }
     }
+
+    // when the component has been drawn the first time
+    componentDidMount() {
+        console.log('Component did mount!')
+        setInterval(this.intervalOccured, 100)
+    }
+
     intervalOccured = () => {
         //this.GameLogic.stick();
         this.GameLogic.fall();
         this.setState(this.GameLogic.makeState());
     }
-
+    
     handleButtonPressed = (event) => {
         console.log(KeyboardEvent);
         if (event.key === "ArrowUp") {
@@ -33,8 +42,6 @@ class TetrisGame extends React.Component {
             this.GameLogic.moveLeft();
         } else if (event.key === "ArrowDown") {
             this.GameLogic.moveDown();
-        } else if (event.key === "a") {
-            setInterval(this.intervalOccured, 100);
         } else if (event.key === "s") {
             this.GameLogic.splash();
         } else if (event.key === "h") {
@@ -44,13 +51,12 @@ class TetrisGame extends React.Component {
     }
 
     render = () => {
-
         return (
             <div tabIndex="0" onKeyDown={this.handleButtonPressed}>
-                <PlayerView game={this.state.game} next={this.state.next} score={this.state.score} lose={this.state.lose} level={this.state.level} />
+                <PlayerView everything={this.state.everything}/>
             </div>
         );
     }
 }
 
-export default TetrisGame;
+export default SingleplayerTetrisGame;

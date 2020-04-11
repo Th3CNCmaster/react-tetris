@@ -1,6 +1,5 @@
-export default class GameLogic {
+class GameLogic {
     //Tetris: width: 10 height: 20
-    // renderer är någonting som kan dorender state
     constructor() {
         let width = 10;
         this.gameOverMessage = "";
@@ -24,7 +23,8 @@ export default class GameLogic {
         this.tetrominos = [createTetromino(), createTetromino(), createTetromino()];
         this.reset();
         this.counter = 0;
-        this.rotated = false; 
+        this.rotated = false;
+
     }
 
     computeNext = () => {
@@ -94,13 +94,11 @@ export default class GameLogic {
         }
         //console.log("this is null ", merged)
         return {
-            everything: {
-                game: merged,
-                next: deepCopy(this.computeNext()),
-                score: this.score,
-                lose: this.gameOverMessage,
-                level: 11 - this.slowness,
-            }
+            game: merged,
+            next: deepCopy(this.computeNext()),
+            score: this.score,
+            lose: this.gameOverMessage,
+            level: 11 - this.slowness,
         };
     }
 
@@ -108,7 +106,7 @@ export default class GameLogic {
         if (!this.gameOver) {
             this.counter++;
             this.time++;
-            if (this.time > this.lastTime * 1.2 + 700 && this.slowness > 6) {
+            if (this.time > this.lastTime * 1.2 + 700 && this.slowness > 5) {
                 this.lastTime = this.time;
                 this.slowness--;
             }
@@ -124,14 +122,12 @@ export default class GameLogic {
                     this.removeFullRows();
                     this.reset()
                 }
-                return true;
             }
         }
-        return false;
     }
     //Special thing for multiplayer
     splash = () => {
-        //this.score -= 10000;
+        this.score -= 10000;
         let splash = [[], [], [], [], []];
         for (let index = 0; index < 5; index++) {
             for (let otherIndex = 0; otherIndex < 5; otherIndex++) {
@@ -147,7 +143,7 @@ export default class GameLogic {
     //Special thing for multiplayer
     createHole = () => {
         if (this.score > 2000) {
-           //this.score -= 2000;
+            this.score -= 2000;
         }
         let randomVal = Math.floor(Math.random() * 7) + 1;
         this.tetrominos[0] = createFunctions[7](randomVal);
@@ -415,3 +411,5 @@ const detectIfFull = (row) => {
     }
     return true;
 }
+
+export default GameLogic;
