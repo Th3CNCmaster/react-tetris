@@ -13,6 +13,8 @@ class TetrisGame extends React.Component {
             game: [[1, 2, 3], [2, 3, 4], [1, 1, 1, 1, 1, 1, 1, 1,]],
             next: [[1, 2, 3], [2, 3, 4], [1, 11, 1]],
             score: 1,
+            lose: "",
+            level: "",
         }
     }
     intervalOccured = () => {
@@ -33,6 +35,10 @@ class TetrisGame extends React.Component {
             this.GameLogic.moveDown();
         } else if (event.key === "a") {
             setInterval(this.intervalOccured, 100);
+        } else if (event.key === "s") {
+            this.GameLogic.splash();
+        } else if (event.key === "h") {
+            this.GameLogic.createHole();
         }
         this.setState(this.GameLogic.makeState());
     }
@@ -41,7 +47,7 @@ class TetrisGame extends React.Component {
 
         return (
             <div tabIndex="0" onKeyDown={this.handleButtonPressed}>
-                <PlayerView game={this.state.game} next={this.state.next} score={this.state.score} />
+                <PlayerView game={this.state.game} next={this.state.next} score={this.state.score} lose={this.state.lose} level={this.state.level} />
             </div>
         );
     }

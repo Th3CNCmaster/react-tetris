@@ -22,6 +22,12 @@ class PlayerView extends React.Component {
                             <h2>
                                 Score: {this.props.score}
                             </h2>
+                            <h1>
+                                {this.props.lose}
+                            </h1>
+                            <h2>
+                                Level: {this.props.level}
+                            </h2>
                         </td>
                     </tr>
                 </tbody>

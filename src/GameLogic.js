@@ -2,6 +2,7 @@ class GameLogic {
     //Tetris: width: 10 height: 20
     constructor() {
         let width = 10;
+        this.gameOverMessage = "";
         let height = 20;
         this.score = 0;
         this.time = 0;
@@ -80,7 +81,7 @@ class GameLogic {
         } else {
             if (this.gameOver == false) {
                 this.gameOver = true;
-                this.score = "Game Over! score: " + this.score;
+                this.gameOverMessage = "Game Over!";
             }
 
         }
@@ -95,7 +96,9 @@ class GameLogic {
         return {
             game: merged,
             next: deepCopy(this.computeNext()),
-            score: this.score
+            score: this.score,
+            lose: this.gameOverMessage,
+            level: 11 - this.slowness,
         };
     }
 
@@ -122,7 +125,7 @@ class GameLogic {
             }
         }
     }
-
+    //Special thing for multiplayer
     splash = () => {
         this.score -= 10000;
         let splash = [[], [], [], [], []];
@@ -137,6 +140,15 @@ class GameLogic {
         }
         this.board = mergeAndIgnoreCollission(this.board, splash, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 8) + 7);
     }
+    //Special thing for multiplayer
+    createHole = () => {
+        if (this.score > 2000) {
+            this.score -= 2000;
+        }
+        let randomVal = Math.floor(Math.random() * 7) + 1;
+        this.tetrominos[0] = createFunctions[7](randomVal);
+    }
+
 
     // Used to draw shadow
     fallToBottom = () => {
@@ -267,7 +279,6 @@ const createS = (color) => {
         id: 4
     };
 }
-
 const createZ = (color) => {
     let c = color;
     return {
@@ -296,7 +307,21 @@ const createJ = (color) => {
     };
 }
 
-const createFunctions = [createStraight, createSquare, createT, createL, createS, createZ, createJ];
+const createHole = (color) => {
+    let c = color;
+    return {
+        shape: [
+            [0, 0, 0, 0, 0],
+            [0, 0, c, 0, 0],
+            [0, c, 0, c, 0],
+            [0, 0, c, 0, 0],
+            [0, 0, 0, 0, 0]
+        ],
+        id: 7
+    };
+}
+
+const createFunctions = [createStraight, createSquare, createT, createL, createS, createZ, createJ, createHole];
 
 const createTetromino = () => {
     let tetromino = Math.floor(Math.random() * 7);
