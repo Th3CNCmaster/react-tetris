@@ -123,6 +123,21 @@ class GameLogic {
         }
     }
 
+    splash = () => {
+        this.score -= 10000;
+        let splash = [[], [], [], [], []];
+        for (let index = 0; index < 5; index++) {
+            for (let otherIndex = 0; otherIndex < 5; otherIndex++) {
+                if (Math.floor(Math.random() * 8) + 1 == 4) {
+                    splash[index][otherIndex] = Math.floor(Math.random() * 7) + 1;
+                } else {
+                    splash[index][otherIndex] = 0;
+                }
+            }
+        }
+        this.board = mergeAndIgnoreCollission(this.board, splash, Math.floor(Math.random() * 6) + 1, Math.floor(Math.random() * 8) + 7);
+    }
+
     // Used to draw shadow
     fallToBottom = () => {
         let i = 0;
