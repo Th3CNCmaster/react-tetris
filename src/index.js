@@ -4,11 +4,20 @@ import './index.css';
 import App from './App';
 import SingleplayerTetrisGame from "./SingleplayerTetrisGame";
 import MultiplayerTetrisGame from "./MultiplayerTetrisGame";
+import Lobby from "./Lobby";
+import Login from "./Login";
 import * as serviceWorker from './serviceWorker';
+
+const players = [
+  { username: "Axel" },
+  { username: "Karl" }
+];
 
 ReactDOM.render(
   <React.StrictMode>
     <SingleplayerTetrisGame />
+    <Login />
+    <Lobby players={players} />
   </React.StrictMode>,
   document.getElementById('root')
 );

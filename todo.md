@@ -3,14 +3,14 @@ Axel
 
 
 1. make index.js draw 2 extra components with fake data. The fake data will later be replaced by real data from a server.
-<LoginComponent />
+<Login />
 
 const players = [
     {username: "Axel"},
     {username: "Karl"}
 ];
 
-<LobbyComponent players={players}>
+<Lobby players={players}>
 
 2. Make empty component files that draw nothing for LoginComponent.js and LobbyComponent.js
 
